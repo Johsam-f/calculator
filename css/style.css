@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Playwrite+IT+Moderna:wght@100..400&family=Sofadi+One&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/*clases for fonts */
+.playwrite-it-moderna{
+    font-family: "Playwrite IT Moderna", cursive;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  .cedarville-cursive-regular {
+    font-family: "Cedarville Cursive", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .sofadi-one-regular {
+    font-family: "Sofadi One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* general syles */
+
+  body{
+    background: url("https://images.pexels.com/photos/2115257/pexels-photo-2115257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+    no-repeat center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.container{
+    background: rgba(0, 0, 0, 0.9);
+    height: 700px;
+    width: 400px;
+    border-radius: 20px;
+    box-shadow: 0 0 2px 2px #4000ff;
+}
+
+/*display styles*/
+
+#display-input, #display-result{
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  text-align: end;
+  font-size: 1.5rem;
+  padding: 0 3%;
+}
+
+#display-input{
+  justify-content: end;
+}
+
+#display-result{
+  justify-content: center;
+}
+
+#input-paragraph{
+  width: 100%;
+  height: 40%;
+}
+
+.clear-bar{
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10%;
+}
+
+/*button styles*/
+
+.btn-container{
+    height: 55%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 10px;
+    border-radius: 20px;
+}
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.btn{
+    background: #e0e0e0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.btn:hover{
+  background-color: #d0d0d0;
+}
+
+#delete-btn:active{
+  opacity: 0.8;
+}
+
+.btn:active{
+  opacity: 0.8;
+}
+
+#screen{
+  height: 40%;
+}
+  
+.blue-color{
+  color: #4000ff;
+}
+
+.white-color{
+  color: #aaa;
+}
+
+.blue-background{
+  background-color: #4000ff;
+}
+
