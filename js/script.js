@@ -25,7 +25,9 @@ function Display(value){
     if(display_value.innerText === "0"){
         display_value.innerText = value;
     }else{
-        display_value.innerText += value;
+        if(display_value.innerText.length<=18){
+            display_value.innerText += value;
+        }
     }
  }
 
@@ -99,3 +101,10 @@ delete_btn.addEventListener("click", function () {
         display_value.innerText = '0';
     }
 });
+
+// equal_btn.addEventListener("click", function(){
+//     let display_value = document.getElementById("input-paragraph");
+//     let display_result = document.getElementById("display-paragraph");
+
+
+// });
