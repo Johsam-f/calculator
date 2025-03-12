@@ -87,3 +87,15 @@ clear_btn.addEventListener("click", function(){
     let display_value = document.getElementById("input-paragraph");
     display_value.innerText = '0';
 });
+
+delete_btn.addEventListener("click", function () {
+    let display_value = document.getElementById("input-paragraph");
+    let current_text = display_value.innerText;
+
+    if (current_text.length > 1) {
+        current_text = current_text.slice(0, -1);
+        display_value.innerText = current_text;
+    } else {
+        display_value.innerText = '0';
+    }
+});
