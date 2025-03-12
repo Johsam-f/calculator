@@ -135,3 +135,14 @@ button{
   background-color: #4000ff;
 }
 
+@media (max-width:450px) {
+  .container{
+    width: 93vw;
+  }
+}
+
+@media (max-height: 750px){
+  .container{
+    height: 97vh;
+  }
+}
