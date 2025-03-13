@@ -22,65 +22,68 @@ const equal_btn = document.getElementById("equal-btn");
 
 let left_operand = 0;
 let right_operand = 0;
-let operand = '';
+let sign = '';
 
 function Display(value){
-    // let display_value = document.getElementById("input-paragraph");
-    // if(value === "."){
-    //         display_value.innerText += value;
-    // }else if(display_value.innerText == "0"){
-    //     display_value.innerText = value;
-    // }else{
-    //     if(display_value.innerText.length<=18){
-    //         display_value.innerText += value;
-    //     }
-    // }
-
     let current_operand = document.getElementById("input-paragraph");
     let display_result = document.getElementById("display-paragraph");
-
+    let left_digits = document.getElementById("initial-input-paragraph");
+    if(value === '(' || value === ')' || value === '%'){
+        return;
+    }
     if(value ==='='){
         if(current_operand.innerText == "0"){
             display_result.innerText = '0';
         }else{
             let result;
-            if(operand === '-'){
+            right_operand = Number(current_operand.innerText);
+            if(sign === '-'){
                 result = left_operand - right_operand;
-            }else if(operand === '+'){
+            }else if(sign === '+'){
                 result = left_operand + right_operand;
-            }else if(operand === '/'){
+            }else if(sign === '/'){
                 result = left_operand / right_operand;
-            }else{
+            }else if(sign === '*'){
                 result = left_operand * right_operand;
+            }else{
+                result = "Error";
             }
 
             display_result.innerText = result;
         }
-
-        // if(current_operand.innerText == "0"){
-        //     display_result.innerText = '0';
-        // }else{
-        //     try {
-        //         let result = eval(current_operand.innerText);
-        //         display_result.innerText = result;
-        //     } catch (error) {
-        //         display_result.innerText = "Syntax Error";
-        //     }
-        // }
-
-    }else if(value === "+" || value === "/" || value === "*" || value === "-"){
-        if(current_operand.innerText == "0"){
-            if(value === "-" || value === "+"){
-                current_operand.innerText = value;
-            }else{
-                return;
-            }   
-        }else{
-            left_operand = current_operand.innerText;
-        }
-
-
     }else{
+        if(value === "+" || value === "/" || value === "*" || value === "-"){
+            let characters = current_operand.innerText.split('');
+            let sign_available = false;
+            characters.forEach((value, index)=>{
+                if(value == '/' || value == '*' || value == '+' || value == '-'){    
+                    sign_available = true;
+                    sign = value;
+                }
+            });
+
+            if(!sign_available){
+                if(current_operand.innerText == "0"){
+                    if(value === "-" || value === "+"){
+                        let left_digits = document.getElementById("initial-input-paragraph");
+                        let characters = left_digits.innerText.split('');
+                        if(characters[characters.length-1] == '-' || characters[characters.length-1] == '+'){
+                            return;
+                        }else{
+                            current_operand.innerText = value;
+                        }
+                    }else{
+                        return;
+                    }   
+                }else{
+                    left_operand = Number(current_operand.innerText);
+                    sign = value;
+                    left_digits.innerText = current_operand.innerText + value;
+                    current_operand.innerText = '0';
+                    return;
+                }
+            }
+        }
         if(value === "."){
             let characters = current_operand.innerText.split('');
             let dot_available = false;
@@ -160,8 +163,10 @@ percentage_btn.addEventListener("click", function () {
 clear_btn.addEventListener("click", function(){
     let display_value = document.getElementById("input-paragraph");
     let display_result = document.getElementById("display-paragraph");
+    let left_digits = document.getElementById("initial-input-paragraph");
     display_value.innerText = '0';
     display_result.innerText = '';
+    left_digits.innerText = '';
 });
 
 delete_btn.addEventListener("click", function () {
@@ -179,62 +184,3 @@ delete_btn.addEventListener("click", function () {
 equal_btn.addEventListener("click", function () {
     Display('=');
 });
-
-// equal_btn.addEventListener("click", function () {
-//     let display_value = document.getElementById("input-paragraph");
-//     let display_result = document.getElementById("display-paragraph");
-//     let current_text = display_value.innerText;
-//     let characters = current_text.split('');
-//     let syntaxError = false;
-
-//     function check_value(value, index, array) {
-//         // Check if the first character is an operator (except '-')
-//         if (index === 0 && (value === "+" || value === "/" || value === "*")) {
-//             syntaxError = true;
-//         }
-
-//         if (index > 0 && (value === "+" || value === "-" || value === "*" || value === "/")) {
-//             const previousValue = array[index - 1];
-//             if (previousValue === "+" || previousValue === "-" || previousValue === "*" || previousValue === "/") {
-//                 syntaxError = true;
-//             }
-//         }
-//     }
-//     characters.forEach(check_value);
-
-//     // If there are no syntax errors, evaluate the expression
-//     if (!syntaxError) {
-//         try {
-//             let result = eval(current_text);
-//             display_result.innerText = result;
-//         } catch (error) {
-//             display_result.innerText = "Syntax Error";
-//         }
-//     } else {
-//         display_result.innerText = "Syntax Error";
-//     }
-// });
-
-// equal_btn.addEventListener("click", function(){
-//     let display_value = document.getElementById("input-paragraph");
-//     let display_result = document.getElementById("display-paragraph");
-//     let current_text = display_value.innerText;    
-//     let characters = current_text.split('');
-//     let expression_a = [];
-//     let expression_b = [];
-//     let sytaxError = false;
-
-//     function check_value(value, index, array){
-//         if(index === 0 && (value === "-" || value === "+" || value === "/" || value === "*")){
-//             sytaxError = true;
-//         }
-//          // Check for consecutive operators
-//         if (index > 0 && (value === "+" || value === "-" || value === "*" || value === "/")) {
-//             const previousValue = array[index - 1];
-//             if (previousValue === "+" || previousValue === "-" || previousValue === "*" || previousValue === "/") {
-//                 syntaxError = true;
-//             }
-//         }
-//     }
-//     characters.forEach(check_value(value, index, array, sytaxError));
-// });

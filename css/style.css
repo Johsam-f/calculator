@@ -47,8 +47,9 @@
 
 /*display styles*/
 
-#display-input, #display-result{
-  height: 50%;
+#display-input, 
+#left-input,
+#display-result{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -58,14 +59,24 @@
   padding: 0 3%;
 }
 
-#display-input{
+#display-input, 
+#display-result{
+  height: 30%;
+}
+#left-input{
+  height: 40%;
+}
+
+#left-input{
   justify-content: end;
 }
 
+#display-input,
 #display-result{
   justify-content: center;
 }
 
+#initial-input-paragraph,
 #input-paragraph, 
 #display-paragraph{
   width: 100%;
