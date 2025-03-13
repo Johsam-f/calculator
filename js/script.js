@@ -20,15 +20,85 @@ const dot_btn = document.getElementById("dot-btn");
 const percentage_btn = document.getElementById("percentage-btn");
 const equal_btn = document.getElementById("equal-btn");
 
+let left_operand = 0;
+let right_operand = 0;
+let operand = '';
+
 function Display(value){
-    let display_value = document.getElementById("input-paragraph");
-    if(value === "."){
-            display_value.innerText += value;
-    }else if(display_value.innerText == "0"){
-        display_value.innerText = value;
+    // let display_value = document.getElementById("input-paragraph");
+    // if(value === "."){
+    //         display_value.innerText += value;
+    // }else if(display_value.innerText == "0"){
+    //     display_value.innerText = value;
+    // }else{
+    //     if(display_value.innerText.length<=18){
+    //         display_value.innerText += value;
+    //     }
+    // }
+
+    let current_operand = document.getElementById("input-paragraph");
+    let display_result = document.getElementById("display-paragraph");
+
+    if(value ==='='){
+        if(current_operand.innerText == "0"){
+            display_result.innerText = '0';
+        }else{
+            let result;
+            if(operand === '-'){
+                result = left_operand - right_operand;
+            }else if(operand === '+'){
+                result = left_operand + right_operand;
+            }else if(operand === '/'){
+                result = left_operand / right_operand;
+            }else{
+                result = left_operand * right_operand;
+            }
+
+            display_result.innerText = result;
+        }
+
+        // if(current_operand.innerText == "0"){
+        //     display_result.innerText = '0';
+        // }else{
+        //     try {
+        //         let result = eval(current_operand.innerText);
+        //         display_result.innerText = result;
+        //     } catch (error) {
+        //         display_result.innerText = "Syntax Error";
+        //     }
+        // }
+
+    }else if(value === "+" || value === "/" || value === "*" || value === "-"){
+        if(current_operand.innerText == "0"){
+            if(value === "-" || value === "+"){
+                current_operand.innerText = value;
+            }else{
+                return;
+            }   
+        }else{
+            left_operand = current_operand.innerText;
+        }
+
+
     }else{
-        if(display_value.innerText.length<=18){
-            display_value.innerText += value;
+        if(value === "."){
+            let characters = current_operand.innerText.split('');
+            let dot_available = false;
+            //checking if the dot already exist
+            characters.forEach((value)=>{
+                if(value == '.'){
+                    dot_available = true;
+                }
+            });
+            if(dot_available == false){
+                current_operand.innerText += value;
+            }
+        }else if(current_operand.innerText == "0"){
+            current_operand.innerText = value;
+        }else{
+            if(current_operand.innerText.length<=18){
+                current_operand.innerText += value;
+            }
         }
     }
  }
@@ -107,39 +177,43 @@ delete_btn.addEventListener("click", function () {
 });
 
 equal_btn.addEventListener("click", function () {
-    let display_value = document.getElementById("input-paragraph");
-    let display_result = document.getElementById("display-paragraph");
-    let current_text = display_value.innerText;
-    let characters = current_text.split('');
-    let syntaxError = false;
-
-    function check_value(value, index, array) {
-        // Check if the first character is an operator (except '-')
-        if (index === 0 && (value === "+" || value === "/" || value === "*")) {
-            syntaxError = true;
-        }
-
-        if (index > 0 && (value === "+" || value === "-" || value === "*" || value === "/")) {
-            const previousValue = array[index - 1];
-            if (previousValue === "+" || previousValue === "-" || previousValue === "*" || previousValue === "/") {
-                syntaxError = true;
-            }
-        }
-    }
-    characters.forEach(check_value);
-
-    // If there are no syntax errors, evaluate the expression
-    if (!syntaxError) {
-        try {
-            let result = eval(current_text);
-            display_result.innerText = result;
-        } catch (error) {
-            display_result.innerText = "Syntax Error";
-        }
-    } else {
-        display_result.innerText = "Syntax Error";
-    }
+    Display('=');
 });
+
+// equal_btn.addEventListener("click", function () {
+//     let display_value = document.getElementById("input-paragraph");
+//     let display_result = document.getElementById("display-paragraph");
+//     let current_text = display_value.innerText;
+//     let characters = current_text.split('');
+//     let syntaxError = false;
+
+//     function check_value(value, index, array) {
+//         // Check if the first character is an operator (except '-')
+//         if (index === 0 && (value === "+" || value === "/" || value === "*")) {
+//             syntaxError = true;
+//         }
+
+//         if (index > 0 && (value === "+" || value === "-" || value === "*" || value === "/")) {
+//             const previousValue = array[index - 1];
+//             if (previousValue === "+" || previousValue === "-" || previousValue === "*" || previousValue === "/") {
+//                 syntaxError = true;
+//             }
+//         }
+//     }
+//     characters.forEach(check_value);
+
+//     // If there are no syntax errors, evaluate the expression
+//     if (!syntaxError) {
+//         try {
+//             let result = eval(current_text);
+//             display_result.innerText = result;
+//         } catch (error) {
+//             display_result.innerText = "Syntax Error";
+//         }
+//     } else {
+//         display_result.innerText = "Syntax Error";
+//     }
+// });
 
 // equal_btn.addEventListener("click", function(){
 //     let display_value = document.getElementById("input-paragraph");
