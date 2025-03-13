@@ -38,9 +38,17 @@ function Display(value){
             let result;
             right_operand = Number(current_operand.innerText);
             if(sign === '-'){
-                result = left_operand - right_operand;
+                if(right_operand === "0"){
+                    result = left_operand;
+                }else{
+                    result = left_operand - right_operand;
+                }
             }else if(sign === '+'){
-                result = left_operand + right_operand;
+                if(right_operand === "0"){
+                    result = left_operand;
+                }else{
+                    result = left_operand + right_operand;
+                }
             }else if(sign === '/'){
                 result = left_operand / right_operand;
             }else if(sign === '*'){
@@ -52,7 +60,15 @@ function Display(value){
             display_result.innerText = result;
         }
     }else{
+        
         if(value === "+" || value === "/" || value === "*" || value === "-"){
+            let digits = document.getElementById('initial-input-paragraph');
+            let answers_digits = document.getElementById('display-paragraph');
+            let char = digits.innerText.split('');
+
+            if(char[char.length-1] == "+" || char[char.length-1] == "-" || char[char.length-1] == "*" || char[char.length-1] == "/"){
+                return;
+            }
             let characters = current_operand.innerText.split('');
             let sign_available = false;
             characters.forEach((value, index)=>{
@@ -64,17 +80,24 @@ function Display(value){
 
             if(!sign_available){
                 if(current_operand.innerText == "0"){
-                    if(value === "-" || value === "+"){
-                        let left_digits = document.getElementById("initial-input-paragraph");
-                        let characters = left_digits.innerText.split('');
-                        if(characters[characters.length-1] == '-' || characters[characters.length-1] == '+'){
-                            return;
-                        }else{
-                            current_operand.innerText = value;
-                        }
-                    }else{
-                        return;
-                    }   
+                    if(value === "-" || value === "+" || value === "*" || value === "/"){
+                        return
+                    }
+
+
+                    //not working properly
+                    
+                    // if(value === "-" || value === "+"){
+                    //     let left_digits = document.getElementById("initial-input-paragraph");
+                    //     let characters = left_digits.innerText.split('');
+                    //     if(characters[characters.length-1] == '-' || characters[characters.length-1] == '+'){
+                    //         return;
+                    //     }else{
+                    //         current_operand.innerText = value;
+                    //     }
+                    // }else{
+                    //     return;
+                    // }   
                 }else{
                     left_operand = Number(current_operand.innerText);
                     sign = value;
@@ -83,7 +106,8 @@ function Display(value){
                     return;
                 }
             }
-        }
+        } 
+        
         if(value === "."){
             let characters = current_operand.innerText.split('');
             let dot_available = false;
