@@ -108,7 +108,7 @@ button{
 }
 
 .btn:hover{
-  background-color: #d0d0d0;
+  background-color: #b0b0b0;
 }
 
 #delete-btn:active{
@@ -133,6 +133,14 @@ button{
 
 .blue-background{
   background-color: #4000ff;
+}
+
+.blue-background:hover{
+  background-color: #5c2af3fa;
+}
+
+#dot-btn{
+  font-size: 25px;
 }
 
 @media (max-width:450px) {
