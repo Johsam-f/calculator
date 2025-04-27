@@ -39,17 +39,21 @@
 
 .container{
     background: rgba(0, 0, 0, 0.9); 
-    height: 700px;
-    width: 400px;
+    height: 700px; 
+    width: 350px;
     border-radius: 20px;
     box-shadow: 0 0 2px 2px #4000ff;
 }
 
-/*display styles*/
+/*display styles*/ 
 
-#display-input, 
-#left-input,
-#display-result{
+#screen{
+  height: 40%;
+  display: grid;
+  place-items: center;
+}
+
+#display-input{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -57,23 +61,7 @@
   text-align: end;
   font-size: 1.5rem;
   padding: 0 3%;
-}
-
-#display-input, 
-#display-result{
-  height: 30%;
-}
-#left-input{
-  height: 40%;
-}
-
-#left-input{
-  justify-content: end;
-}
-
-#display-input,
-#display-result{
-  justify-content: center;
+  overflow: hidden;
 }
 
 #initial-input-paragraph,
@@ -128,10 +116,6 @@ button{
 
 .btn:active{
   opacity: 0.8;
-}
-
-#screen{
-  height: 40%;
 }
   
 .blue-color{
