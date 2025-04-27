@@ -64,9 +64,7 @@
   overflow: hidden;
 }
 
-#initial-input-paragraph,
-#input-paragraph, 
-#display-paragraph{
+#input-paragraph{
   width: 100%;
   height: 40%;
   overflow: hidden;
@@ -79,6 +77,10 @@
   display: flex;
   justify-content: space-between;
   padding: 0 10%;
+}
+
+#icons{
+  pointer-events: none;
 }
 
 /*button styles*/
